@@ -1,4 +1,11 @@
 type User 
 {
     name: String!
+    residenceCountry: Country! @relationship(type: "LIVES_IN", direction: OUT)
+}
+
+type Country 
+@exclude(operations: [UPDATE, DELETE])
+{
+    name: String! @unique
 }

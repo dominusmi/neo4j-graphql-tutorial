@@ -49,10 +49,6 @@ const server = new ApolloServer({
     ]
 })
 
-/*
- * Optionally, apply Express middleware for authentication, etc
- * This also also allows us to specify a path for the GraphQL endpoint
- */
 server.start().then(() => {
     server.applyMiddleware({ app, path: GRAPHQL_PATH });
     app.listen({ host: GRAPHQL_HOST, port: GRAPHQL_PORT, path: GRAPHQL_PATH}, () => {
