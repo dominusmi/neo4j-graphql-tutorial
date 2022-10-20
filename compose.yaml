@@ -1,6 +1,22 @@
 version: '2.4'
 
 services:
+  backend:
+    build:
+      dockerfile: docker/Dockerfile
+    volumes:
+      - ./src:/backend/src
+    environment:
+      - NEO4J_URI=${NEO4J_URI}
+      - NEO4J_USER=${NEO4J_USER}
+      - NEO4J_PASSWORD=${NEO4J_PASSWORD}
+      - NEO4J_DATABASE=neo4j
+      - GRAPHQL_SERVER_PORT=${GRAPHQL_SERVER_PORT}
+      - GRAPHQL_SERVER_PATH=${GRAPHQL_SERVER_PATH}
+      - GRAPHQL_SERVER_HOST=${GRAPHQL_SERVER_HOST}
+    ports:
+      - ${GRAPHQL_SERVER_PORT}:${GRAPHQL_SERVER_PORT}
+
   neo4j:
     image: neo4j:4.3.3
     ports:
