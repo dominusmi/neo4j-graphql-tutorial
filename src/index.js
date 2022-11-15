@@ -51,7 +51,22 @@ const server = new ApolloServer({
 
 server.start().then(() => {
     server.applyMiddleware({ app, path: GRAPHQL_PATH });
-    app.listen({ host: GRAPHQL_HOST, port: GRAPHQL_PORT, path: GRAPHQL_PATH}, () => {
-        console.log(`GraphQL server ready at http://${GRAPHQL_HOST}:${GRAPHQL_PORT}${GRAPHQL_PATH}`)
-    })
+    app.listen({ host, port, path }, async () => {
+        let attempt = 0;
+        while(attempt < 3){
+          try {
+            console.log("Asserting constraints and indexes")
+            await neoSchema.assertIndexesAndConstraints({ options: { create: true }});
+            break;
+          }catch(e){
+            // It is most likely is an error due to the database not being up and running yet. 
+            // We still print the exception string to make sure it's not something more
+            attempt += 1;
+            console.log(`${e}`);
+            console.log(`Caught error while checking database constraints, retrying in 30 seconds [${attempt}/3]`);
+            await new Promise(r => setTimeout(r, 30000));
+          }
+        }
+        console.log(`GraphQL server ready at http://${host}:${port}${path}`)
+      })
 });
