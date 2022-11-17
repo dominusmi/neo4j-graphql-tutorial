@@ -51,7 +51,7 @@ const server = new ApolloServer({
 
 server.start().then(() => {
     server.applyMiddleware({ app, path: GRAPHQL_PATH });
-    app.listen({ host, port, path }, async () => {
+    app.listen({ host: GRAPHQL_HOST, port: GRAPHQL_PORT, path: GRAPHQL_PATH }, async () => {
         let attempt = 0;
         while(attempt < 3){
           try {
@@ -67,6 +67,6 @@ server.start().then(() => {
             await new Promise(r => setTimeout(r, 30000));
           }
         }
-        console.log(`GraphQL server ready at http://${host}:${port}${path}`)
+        console.log(`GraphQL server ready at http://${GRAPHQL_HOST}:${GRAPHQL_PORT}${GRAPHQL_PATH}`)
       })
 });
