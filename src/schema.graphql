@@ -1,5 +1,6 @@
 type User 
 {
+    userId: ID! @id
     name: String!
     residenceCountry: Country! @relationship(type: "LIVES_IN", direction: OUT)
 }
