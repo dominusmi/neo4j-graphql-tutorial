@@ -3,6 +3,7 @@ version: '2.4'
 services:
   backend:
     build:
+      context: .
       dockerfile: docker/Dockerfile
     volumes:
       - ./src:/backend/src
