@@ -1,0 +1,28 @@
+type User 
+{
+    email: String! @unique
+    name: String!
+    createdAt: DateTime! @timestamp(operations: [CREATE])
+    updatedAt: DateTime! @timestamp(operations: [CREATE, UPDATE])
+    follows: [User!]! @relationship(type: "FOLLOWS", direction: OUT)
+    likes: [Post!]! @relationship(type: "LIKES", direction: OUT)
+    posts: [Post!]! @relationship(type: "AUTHORED", direction: OUT)
+}
+
+type Post 
+{
+    postId: ID! @id
+    content: String!
+    createdAt: DateTime! @timestamp(operations: [CREATE])
+    updatedAt: DateTime! @timestamp(operations: [CREATE, UPDATE])
+    author: User! @relationship(type: "AUTHORED", direction: IN)
+    reply: Post @relationship(type: "REPLIES_TO", direction: OUT)
+    tags: [Tag!]! @relationship(type: "HAS_TAG", direction: OUT)
+}
+
+type Tag
+{
+    slug: String! @unique
+    createdAt: DateTime! @timestamp(operations: [CREATE])
+    updatedAt: DateTime! @timestamp(operations: [CREATE, UPDATE])
+}
