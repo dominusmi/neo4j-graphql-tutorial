@@ -2,7 +2,7 @@ FROM node:16-bullseye-slim
 
 WORKDIR /backend
 
-COPY package*.json ./
+COPY package.json ./
 
 RUN npm install
 
