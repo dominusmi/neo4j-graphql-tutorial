@@ -9,7 +9,7 @@
     "start": "node src/index.js",
     "start:dev": "./node_modules/.bin/nodemon --watch src --ext js,graphql --exec babel-node  src/index.js"
   },
-  "author": "Edoardo Barp",
+  "author": "dominusmi",
   "license": "MIT",
   "dependencies": {
     "@apollo/client": "^3.7.0",
