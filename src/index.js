@@ -3,7 +3,7 @@ import { ApolloServer } from 'apollo-server-express'
 import { ApolloServerPluginLandingPageLocalDefault } from "apollo-server-core";
 import express from 'express'
 import { Neo4jGraphQL } from '@neo4j/graphql'
-import { resolvers } from './resolves/definition.js'
+import { resolvers } from './resolvers/definition.js'
 import { GRAPHQL_HOST, GRAPHQL_PORT, GRAPHQL_PATH, NEO4J_PASSWORD, NEO4J_USER, NEO4J_URI } from "./env.js"
 import { ogm, driver } from './common.js' 
 
