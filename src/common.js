@@ -19,5 +19,6 @@ export const driver = neo4j.driver(
 
 
 export const ogm = new OGM({ typeDefs, driver });
+export const PASSPHRASE = "insecure-passphrase-bip-bop";
 
 

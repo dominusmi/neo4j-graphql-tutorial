@@ -5,11 +5,12 @@ import express from 'express'
 import { Neo4jGraphQL } from '@neo4j/graphql'
 import { resolvers } from './resolvers/definition.js'
 import { GRAPHQL_HOST, GRAPHQL_PORT, GRAPHQL_PATH, NEO4J_PASSWORD, NEO4J_USER, NEO4J_URI } from "./env.js"
-import { ogm, driver } from './common.js' 
+import { ogm, driver, PASSPHRASE } from './common.js' 
+import pkg from '@neo4j/graphql-plugin-auth';
+const { Neo4jGraphQLAuthJWTPlugin } = pkg;
 
 
 const app = express()
-
 
 /*
  * Create an executable GraphQL schema object from GraphQL type definitions
@@ -21,6 +22,11 @@ const neoSchema = new Neo4jGraphQL({
     typeDefs,
     resolvers,
     driver,
+    plugins: {
+      auth: new Neo4jGraphQLAuthJWTPlugin({
+        secret: PASSPHRASE
+      })
+    }  
 })
 
 
